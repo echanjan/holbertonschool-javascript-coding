@@ -1,10 +1,10 @@
 #!/usr/bin/node
 
-const request = require("request");
+const request = require('request');
 const url = process.argv[2];
 
 if (!url) {
-  console.log("Debe proporcionar un URL");
+  console.log('Debe proporcionar un URL');
   process.exit(1);
 }
 
