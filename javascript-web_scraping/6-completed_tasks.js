@@ -1,5 +1,4 @@
 #!/usr/bin/node
-// How many completed?
 
 const request = require("request");
 

@@ -1,5 +1,4 @@
 #!/usr/bin/node
-// Loripsum
 
 const request = require("request");
 const fs = require("fs");
