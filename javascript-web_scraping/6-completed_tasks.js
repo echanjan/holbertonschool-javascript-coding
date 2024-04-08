@@ -1,11 +1,11 @@
 #!/usr/bin/node
 
-const request = require("request");
+const request = require('request');
 
 const url = process.argv[2];
 
 if (!url) {
-  console.log("Ingrese una URL");
+  console.log('Ingrese una URL');
   process.exit(1);
 }
 
@@ -16,7 +16,7 @@ request(url, (err, response, body) => {
   }
 
   if (response.statusCode !== 200) {
-    console.log("Houston tenemos un problema");
+    console.log('Error');
     process.exit(1);
   }
 
