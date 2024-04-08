@@ -1,15 +1,15 @@
 #!/usr/bin/node
 
-const request = require("request");
+const request = require('request');
 
 const apiUrl = process.argv[2];
 
 if (!apiUrl) {
-  console.error("Error: Debes proporcionar la URL de la API de Star Wars.");
+  console.error('Error: Debes proporcionar la URL de la API de Star Wars.');
   process.exit(1);
 }
 
-const characterId = "18";
+const characterId = '18';
 
 request.get(apiUrl, (error, response, body) => {
   if (error) {
