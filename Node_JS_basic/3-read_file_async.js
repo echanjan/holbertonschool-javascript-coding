@@ -1,18 +1,18 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 
 function Person(data) {
   const [firstname, lastname, age, field] = data.split(',');
-  this.firstname = ` ${firstname}`;
-  this.lastname = lastname;
-  this.age = age;
-  this.field = field;
+  this.firstname = firstname.trim();
+  this.lastname = lastname.trim();
+  this.age = parseInt(age.trim(), 10);
+  this.field = field.trim();
 }
 
 function getPersons(persons) {
   const personObj = [];
   if (Array.isArray(persons)) {
     persons.shift();
-    persons.map((p) => personObj.push(new Person(p)));
+    persons.forEach((p) => personObj.push(new Person(p)));
   }
   return personObj;
 }
@@ -40,21 +40,17 @@ function stats(persons) {
   const swe = getInfo(personObj, 'field', 'SWE');
 
   console.log(`Number of students: ${personObj.length}`);
-  console.log(
-    `Number of students in CS: ${cs.total}. List:${cs.names.join(',')}`,
-  );
-  console.log(
-    `Number of students in SWE: ${swe.total}. List:${swe.names.join(',')}`,
-  );
+  console.log(`Number of students in CS: ${cs.total}. List: ${cs.names.join(', ')}`);
+  console.log(`Number of students in SWE: ${swe.total}. List: ${swe.names.join(', ')}`);
 }
 
-function countStudents(filePath) {
-  if (!fs.existsSync(filePath)) {
-    throw new Error('Cannot load the database');
-  } else {
-    const content = fs.readFileSync(filePath, 'utf-8');
+async function countStudents(filePath) {
+  try {
+    const content = await fs.readFile(filePath, 'utf-8');
     const persons = content.split('\n').filter((line) => line.trim() !== '');
     stats(persons);
+  } catch (error) {
+    throw new Error('Cannot load the database');
   }
 }
 
